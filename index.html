@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Invoice - Bootdey.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style type="text/css">
+      body {
+        /* background: #eee; */
+        margin-top: 20px;
+        overflow-x: hidden;
+      }
+      .text-danger strong {
+        color: #9f181c;
+      }
+      .receipt-main {
+        /* background: #ffffff none repeat scroll 0 0; */
+        /* border-bottom: 12px solid #333333; */
+        /* border-top: 12px solid #9f181c; */
+        margin-top: 50px;
+        margin-bottom: 50px;
+        padding: 40px 30px !important;
+        position: relative;
+        /* box-shadow: 0 1px 21px #acacac; */
+        color: #333333;
+        font-family: open sans;
+      }
+      .receipt-main p {
+        color: #333333;
+        font-family: open sans;
+        line-height: 1.42857;
+      }
+      .receipt-footer h1 {
+        font-size: 15px;
+        font-weight: 400 !important;
+        margin: 0 !important;
+      }
+      .receipt-main::after {
+        /* background: #414143 none repeat scroll 0 0; */
+        content: "";
+        height: 5px;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: -13px;
+      }
+      .receipt-main thead {
+        background: #414143 none repeat scroll 0 0;
+      }
+      .receipt-main thead th {
+        color: #fff;
+      }
+      .receipt-right h5 {
+        font-size: 16px;
+        font-weight: bold;
+        margin: 0 0 7px 0;
+      }
+      .receipt-right p {
+        font-size: 12px;
+        margin: 0px;
+      }
+      .receipt-right p i {
+        text-align: center;
+        width: 18px;
+      }
+      .receipt-main td {
+        padding: 9px 20px !important;
+      }
+      .receipt-main th {
+        padding: 13px 20px !important;
+      }
+      .receipt-main td {
+        font-size: 13px;
+        font-weight: initial !important;
+      }
+      .receipt-main td p:last-child {
+        margin: 0;
+        padding: 0;
+      }
+      .receipt-main td h2 {
+        font-size: 20px;
+        font-weight: 900;
+        margin: 0;
+        text-transform: uppercase;
+      }
+      .receipt-header-mid .receipt-left h1 {
+        font-weight: 100;
+        margin: 10px 0 0;
+        text-align: right;
+        text-transform: uppercase;
+      }
+      .receipt-header-mid {
+        margin: 10px 0;
+        overflow: hidden;
+      }
+
+      #container {
+        background-color: #dcdcdc;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="col-md-12">
+      <div class="row">
+        <div
+          class="receipt-main col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3"
+        >
+          <div class="row">
+            <div class="receipt-header">
+              <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="receipt-left">
+                  <img
+                    class="img-responsive"
+                    alt="iamgurdeeposahan"
+                    src="brahim.png"
+                    style="
+                      width: 250px;
+                      border-radius: 43px;
+                      margin-left: -25px;
+                    "
+                  />
+                  <p style="font-weight: bold">
+                    invoice to :<input type="text" style="border: none" />
+                  </p>
+                  <p style="font-weight: bold">
+                    Mobile :<input type="text" style="border: none" />
+                  </p>
+                  <p style="font-weight: bold">
+                    address :<input type="text" style="border: none" />
+                  </p>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+                <div class="receipt-right">
+                  <h3>
+                    INVOICE #
+                    <input
+                      class="text-danger"
+                      type="text"
+                      style="border: none; width: 100px"
+                    />
+                  </h3>
+                  <h5>Marvel Flow Plumbing</h5>
+                  <p><b>Mobile :</b> 0426846114</p>
+                  <p><b>Bsb :</b> 063097</p>
+                  <p><b>Account :</b> 72522293</p>
+                  <p>
+                    <b>Email :</b>
+                    <a
+                      href="/cdn-cgi/l/email-protection"
+                      class="__cf_email__"
+                      data-cfemail="8fecfafcfbe0e2eafdcfe8e2eee6e3a1ece0e2"
+                      >marvelflowplumbing@gmail.com</a
+                    >
+                  </p>
+                  <p><b>Address :</b> Augusta st Condell Park 2200, Sydney</p>
+                  <!-- <h5>
+                    invoice to:<input
+                      type="text"
+                      style="border: none; width: 150px; font-size: 12px"
+                    />
+                  </h5>
+                  <p>
+                    <b>Mobile: </b
+                    ><input
+                      type="text"
+                      style="border: none; width: 150px; font-size: 12px"
+                    />
+                  </p>
+                  <p>
+                    <b>address: </b
+                    ><input
+                      type="text"
+                      style="border: none; width: 150px; font-size: 12px"
+                    />
+                  </p>
+                  <p>
+                    <b>due date: </b
+                    ><input
+                      type="text"
+                      style="border: none; width: 150px; font-size: 12px"
+                    />
+                  </p> -->
+                  <!-- <p>
+                    <a
+                      href="/cdn-cgi/l/email-protection"
+                      class="__cf_email__"
+                      data-cfemail="51323e3c21303f2811363c30383d7f323e3c"
+                      >marvelflowplumbing@gmail.com</a
+                    >
+                    <i class="fa fa-envelope-o"></i>
+                  </p> -->
+                  <!-- <p>AU <i class="fa fa-location-arrow"></i></p> -->
+                  <!-- <h3>
+                    INVOICE #
+                    <br />
+                    <input type="text" style="border: none; color: red" />
+                  </h3> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="receipt-header receipt-header-mid">
+              <div class="col-xs-8 col-sm-8 col-md-8 text-left">
+                <div class="receipt-right"></div>
+              </div>
+              <div class="col-xs-4 col-sm-4 col-md-4">
+                <div class="receipt-left"></div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <table class="table w-50">
+              <thead>
+                <tr>
+                  <th style="width: 100px">Description</th>
+                  <th class="w-25">Qty</th>
+                  <th class="w-25">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="col-md-9">
+                    <textarea
+                      rows="3"
+                      cols="25"
+                      style="border: none"
+                      class="text-center"
+                    ></textarea>
+                  </td>
+                  <td class="col-md-9">
+                    <input
+                      type="text"
+                      style="border: none; width: 80px"
+                      class="text-center"
+                    />
+                  </td>
+                  <td class="col-md-3">
+                    <i class="fa fa-inr"></i>
+                    <input
+                      type="text"
+                      style="border: none; width: 80px"
+                      class="text-center"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td class="col-md-9">
+                    <textarea
+                      rows="3"
+                      cols="25"
+                      style="border: none"
+                      class="text-center"
+                    ></textarea>
+                  </td>
+                  <td class="col-md-9">
+                    <input
+                      type="text"
+                      style="border: none; width: 80px"
+                      class="text-center"
+                    />
+                  </td>
+                  <td class="col-md-3">
+                    <i class="fa fa-inr"></i>
+                    <input
+                      type="text"
+                      style="border: none; width: 80px"
+                      class="text-center"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td class="col-md-9">
+                    <input
+                      type="text"
+                      style="border: none; width: 150px"
+                      class="text-center"
+                    />
+                  </td>
+                  <td class="col-md-9">
+                    <input
+                      type="text"
+                      style="border: none; width: 80px"
+                      class="text-center"
+                    />
+                  </td>
+                  <td class="col-md-3">
+                    <i class="fa fa-inr"></i>
+                    <input
+                      type="text"
+                      style="border: none; width: 80px"
+                      class="text-center"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td class="col-md-9">
+                    <input
+                      type="text"
+                      style="border: none; width: 150px"
+                      class="text-center"
+                    />
+                  </td>
+                  <td class="col-md-9">
+                    <input
+                      type="text"
+                      style="border: none; width: 80px"
+                      class="text-center"
+                    />
+                  </td>
+                  <td class="col-md-3">
+                    <i class="fa fa-inr"></i>
+                    <input
+                      type="text"
+                      style="border: none; width: 80px"
+                      class="text-center"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td class="col-md-9">
+                    <input
+                      type="text"
+                      style="border: none; width: 150px"
+                      class="text-center"
+                    />
+                  </td>
+                  <td class="col-md-9">
+                    <input
+                      type="text"
+                      style="border: none; width: 80px"
+                      class="text-center"
+                    />
+                  </td>
+                  <td class="col-md-3">
+                    <i class="fa fa-inr"></i>
+                    <input
+                      type="text"
+                      style="border: none; width: 80px"
+                      class="text-center"
+                    />
+                  </td>
+                </tr>
+
+                <tr>
+                  <td></td>
+                  <td class="text-right">
+                    <h2><strong>Total: </strong></h2>
+                  </td>
+                  <td class="text-left text-danger">
+                    <h2>
+                      <strong
+                        ><i class="fa fa-inr"></i>
+                        <input
+                          type="text"
+                          style="border: none; width: 100px"
+                          class="text-center"
+                          value="$"
+                      /></strong>
+                    </h2>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row">
+            <div class="receipt-header receipt-header-mid receipt-footer">
+              <div class="col-xs-8 col-sm-8 col-md-8 text-left">
+                <div class="receipt-right">
+                  <p>
+                    <b>Date :</b>
+                    <input
+                      type="text"
+                      style="border: none; font-size: 14px; font-weight: bold"
+                    />
+                  </p>
+                  <h5 style="color: rgb(140, 140, 140)"></h5>
+                </div>
+              </div>
+              <div class="col-xs-4 col-sm-4 col-md-4">
+                <div class="receipt-left">
+                  <h1>Stamp</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <button id="screenshotButton" class="btn btn-danger"> -->
+    <!-- Take Screenshot
+    </button> -->
+    <script>
+      // Function to take a screenshot
+      function takeScreenshot() {
+        // Select the element to capture (in this case, the whole document)
+        const elementToCapture = document.documentElement;
+
+        // Use html2canvas to capture the element
+        html2canvas(elementToCapture).then(function (canvas) {
+          // Create an image element to display the screenshot
+          const screenshotImage = new Image();
+          screenshotImage.src = canvas.toDataURL("image/png");
+
+          // Display the screenshot in a new window or modal
+          const screenshotWindow = window.open();
+          screenshotWindow.document.write(
+            "<img src='" + screenshotImage.src + "' alt='Screenshot'>"
+          );
+        });
+      }
+
+      // Attach the function to the button click event
+      const screenshotButton = document.getElementById("screenshotButton");
+      screenshotButton.addEventListener("click", takeScreenshot);
+    </script>
+
+    <script
+      data-cfasync="false"
+      src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+    ></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+  </body>
+</html>
