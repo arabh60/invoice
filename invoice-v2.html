@@ -6,131 +6,228 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
+  * {
+    box-sizing: border-box;
+  }
+
   body {
     margin: 0;
+    padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
-    background: #eee;
+    background: #fff;
   }
 
   .invoice {
-    max-width: 420px;
-    margin: auto;
+    max-width: 100%;
+    margin: 0;
     background: #fff;
-    padding: 14px;
+    padding: 10px;
+    min-height: 100vh;
   }
 
   /* HEADER */
   .header {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     border-bottom: 2px solid #333;
     padding-bottom: 8px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
 
   .header img {
-    width: 80px;
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
   }
 
   .company {
-    font-size: 12px;
+    font-size: 11px;
     line-height: 1.4;
   }
 
-  /* META */
+  .company b {
+    font-size: 13px;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  /* FORM FIELDS */
   input, textarea {
-    width: 100%;
     border: none;
     border-bottom: 1px solid #ccc;
-    font-size: 14px;
-    padding: 4px 2px;
+    font-size: 13px;
+    padding: 4px 0;
     outline: none;
     background: transparent;
+    font-family: inherit;
   }
 
   textarea {
     resize: none;
     overflow: hidden;
+    width: 100%;
   }
 
   label {
-    font-size: 11px;
+    font-size: 10px;
     color: #666;
+    display: block;
+    margin-top: 6px;
+    margin-bottom: 1px;
   }
 
-  h3 {
-    font-size: 13px;
-    margin: 10px 0 6px;
+  /* SECTIONS */
+  .section {
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-size: 12px;
+    font-weight: bold;
+    margin: 8px 0 6px;
     border-bottom: 1px solid #ddd;
+    padding-bottom: 4px;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+
+  .row.full {
+    grid-template-columns: 1fr;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .field input,
+  .field textarea {
+    width: 100%;
   }
 
   /* COLUMN HEADERS */
   .item-head {
-    display: flex;
-    font-size: 11px;
+    display: grid;
+    grid-template-columns: 3fr 0.5fr 0.5fr;
+    gap: 6px;
+    font-size: 10px;
     color: #666;
-    padding-bottom: 4px;
+    padding: 6px 0;
     border-bottom: 1px solid #bbb;
+    margin-top: 8px;
+    margin-bottom: 4px;
   }
 
-  .item-head .desc { flex: 1; }
-  .item-head .qty,
-  .item-head .price {
-    width: 60px;
+  .item-head > div {
     text-align: center;
+  }
+
+  .item-head .desc {
+    text-align: left;
   }
 
   /* ITEM */
   .item {
     padding: 6px 0;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid #ddd;
   }
 
   .item-row {
-    display: flex;
+    display: grid;
+    grid-template-columns: 3fr 0.5fr 0.5fr;
     gap: 6px;
-    align-items: flex-start;
-  }
-
-  .desc {
-    flex: 1;
+    align-items: center;
   }
 
   .desc textarea {
     text-align: left;
-  }
-
-  .qty,
-  .price {
-    width: 60px;
+    font-size: 12px;
   }
 
   .qty input,
   .price input {
     text-align: center;
+    font-size: 12px;
+    min-width: 40px;
+    width: 100%;
   }
 
-  /* TOTAL */
-  .total {
-    text-align: right;
-    font-size: 15px;
+  .desc textarea {
+    min-width: 0;
+  }
+
+  /* TOTAL SECTION */
+  .total-section {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 2px solid #333;
+  }
+
+  .total-box {
+    width: 150px;
+  }
+
+  .total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
     font-weight: bold;
-    margin-top: 8px;
+  }
+
+  .total-input {
+    width: 70px;
+    text-align: right;
+    font-size: 14px;
+    font-weight: bold;
   }
 
   /* BUTTONS */
   button {
     width: 100%;
     padding: 8px;
-    font-size: 14px;
+    font-size: 13px;
     border: 1px solid #333;
     background: #fff;
     margin-top: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  button:hover {
+    background: #f5f5f5;
   }
 
   .save {
     background: #333;
     color: #fff;
+    font-weight: bold;
+  }
+
+  .save:hover {
+    background: #555;
+  }
+
+  .add-btn {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  @media (max-width: 600px) {
+    .item-head {
+      grid-template-columns: 3fr 0.5fr 0.5fr;
+    }
+
+    .item-row {
+      grid-template-columns: 3fr 0.5fr 0.5fr;
+    }
   }
 </style>
 </head>
@@ -141,48 +238,93 @@
 
   <!-- HEADER -->
   <div class="header">
-    <img src="brahim.png">
+    <img src="brahim.png" alt="Company Logo">
     <div class="company">
-      <b>Marvel Flow Plumbing</b><br>
-      0458271223<br>
-      marvelflowplumbing@gmail.com
+      <b>Marvel Flow Plumbing</b>
+      <div>0458271223</div>
+      <div>marvelflowplumbing@gmail.com</div>
     </div>
   </div>
 
-  <label>Invoice #</label>
-  <input>
-
-  <label>Date</label>
-  <input type="date">
-
-  <h3>Details</h3>
-
-  <div class="item-head">
-    <div class="desc">Description</div>
-    <div class="qty">Qty</div>
-    <div class="price">Amount</div>
-  </div>
-
-  <div id="items">
-    <div class="item">
-      <div class="item-row">
-        <div class="desc">
-          <textarea rows="1" oninput="autoGrow(this)"></textarea>
-        </div>
-        <div class="qty">
-          <input type="number" class="q">
-        </div>
-        <div class="price">
-          <input type="number" class="p">
-        </div>
+  <!-- INVOICE META -->
+  <div class="section">
+    <div class="row">
+      <div class="field">
+        <label>Invoice #</label>
+        <input type="text" id="invoiceNum">
+      </div>
+      <div class="field">
+        <label>Date</label>
+        <input type="date" id="invoiceDate">
       </div>
     </div>
   </div>
 
-  <button onclick="addItem()">+ Add line</button>
+  <!-- CUSTOMER DETAILS -->
+  <div class="section">
+    <div class="section-title">Bill To</div>
+    <div class="row full">
+      <div class="field">
+        <label>Customer Name</label>
+        <input type="text" id="customerName">
+      </div>
+    </div>
+    <div class="row full">
+      <div class="field">
+        <label>Address</label>
+        <textarea rows="2" id="customerAddress"></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="field">
+        <label>Mobile</label>
+        <input type="tel" id="customerMobile">
+      </div>
+      <div class="field">
+        <label>Email</label>
+        <input type="email" id="customerEmail">
+      </div>
+    </div>
+  </div>
 
-  <div class="total">
-    Total: $<span id="total">0.00</span>
+  <!-- ITEMS -->
+  <div class="section">
+    <div class="section-title">Details</div>
+    
+    <div class="item-head">
+      <div class="desc">Description</div>
+      <div class="qty">Qty</div>
+      <div class="price">Amount</div>
+    </div>
+
+    <div id="items">
+      <div class="item">
+        <div class="item-row">
+          <div class="desc">
+            <textarea rows="1" oninput="autoGrow(this)"></textarea>
+          </div>
+          <div class="qty">
+            <input type="number" class="q" step="0.01" min="0">
+          </div>
+          <div class="price">
+            <input type="number" class="p" step="0.01" min="0">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="add-btn" onclick="addItem()">+ Add line</button>
+  </div>
+
+  <!-- TOTAL -->
+  <div class="total-section">
+    <div class="total-box">
+      <div class="total-row">
+        <span>Total:</span>
+        <input type="number" id="total" class="total-input" value="0.00"  ><br>
+      </div>
+      <span>including GST</span>
+    </div>
   </div>
 
   <button class="save" onclick="savePDF()">Save as PDF</button>
@@ -208,10 +350,10 @@ function addItem() {
         <textarea rows="1" oninput="autoGrow(this)"></textarea>
       </div>
       <div class="qty">
-        <input type="number" class="q">
+        <input type="number" class="q" step="0.01" min="0">
       </div>
       <div class="price">
-        <input type="number" class="p">
+        <input type="number" class="p" step="0.01" min="0">
       </div>
     </div>
   `;
@@ -221,21 +363,23 @@ function addItem() {
 document.addEventListener("input", () => {
   let total = 0;
   document.querySelectorAll(".item").forEach(item => {
-    total += (item.querySelector(".q")?.value || 0) *
-             (item.querySelector(".p")?.value || 0);
+    const qty = parseFloat(item.querySelector(".q")?.value) || 0;
+    const price = parseFloat(item.querySelector(".p")?.value) || 0;
+    total += qty * price;
   });
-  document.getElementById("total").innerText = total.toFixed(2);
+  
+  document.getElementById("total").value = total.toFixed(2);
 });
 
 async function savePDF() {
-  const name = prompt("File name");
+  const name = prompt("File name (without .pdf)");
   if (!name) return;
 
-  const canvas = await html2canvas(invoice, { scale: 2 });
+  const canvas = await html2canvas(document.getElementById("invoice"), { scale: 2 });
   const img = canvas.toDataURL("image/png");
 
   const { jsPDF } = window.jspdf;
-  const pdf = new jsPDF("p","mm","a4");
+  const pdf = new jsPDF("p", "mm", "a4");
 
   const w = 210;
   const h = canvas.height * w / canvas.width;
