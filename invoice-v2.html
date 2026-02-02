@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Invoice</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
+    background: #eee;
+  }
+
+  .invoice {
+    max-width: 420px;
+    margin: auto;
+    background: #fff;
+    padding: 14px;
+  }
+
+  /* HEADER */
+  .header {
+    display: flex;
+    gap: 10px;
+    border-bottom: 2px solid #333;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+  }
+
+  .header img {
+    width: 80px;
+  }
+
+  .company {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  /* META */
+  input, textarea {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    font-size: 14px;
+    padding: 4px 2px;
+    outline: none;
+    background: transparent;
+  }
+
+  textarea {
+    resize: none;
+    overflow: hidden;
+  }
+
+  label {
+    font-size: 11px;
+    color: #666;
+  }
+
+  h3 {
+    font-size: 13px;
+    margin: 10px 0 6px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  /* COLUMN HEADERS */
+  .item-head {
+    display: flex;
+    font-size: 11px;
+    color: #666;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #bbb;
+  }
+
+  .item-head .desc { flex: 1; }
+  .item-head .qty,
+  .item-head .price {
+    width: 60px;
+    text-align: center;
+  }
+
+  /* ITEM */
+  .item {
+    padding: 6px 0;
+    border-bottom: 1px solid #000;
+  }
+
+  .item-row {
+    display: flex;
+    gap: 6px;
+    align-items: flex-start;
+  }
+
+  .desc {
+    flex: 1;
+  }
+
+  .desc textarea {
+    text-align: left;
+  }
+
+  .qty,
+  .price {
+    width: 60px;
+  }
+
+  .qty input,
+  .price input {
+    text-align: center;
+  }
+
+  /* TOTAL */
+  .total {
+    text-align: right;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 8px;
+  }
+
+  /* BUTTONS */
+  button {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #333;
+    background: #fff;
+    margin-top: 6px;
+  }
+
+  .save {
+    background: #333;
+    color: #fff;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="invoice" id="invoice">
+
+  <!-- HEADER -->
+  <div class="header">
+    <img src="brahim.png">
+    <div class="company">
+      <b>Marvel Flow Plumbing</b><br>
+      0458271223<br>
+      marvelflowplumbing@gmail.com
+    </div>
+  </div>
+
+  <label>Invoice #</label>
+  <input>
+
+  <label>Date</label>
+  <input type="date">
+
+  <h3>Details</h3>
+
+  <div class="item-head">
+    <div class="desc">Description</div>
+    <div class="qty">Qty</div>
+    <div class="price">Amount</div>
+  </div>
+
+  <div id="items">
+    <div class="item">
+      <div class="item-row">
+        <div class="desc">
+          <textarea rows="1" oninput="autoGrow(this)"></textarea>
+        </div>
+        <div class="qty">
+          <input type="number" class="q">
+        </div>
+        <div class="price">
+          <input type="number" class="p">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button onclick="addItem()">+ Add line</button>
+
+  <div class="total">
+    Total: $<span id="total">0.00</span>
+  </div>
+
+  <button class="save" onclick="savePDF()">Save as PDF</button>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+function autoGrow(el) {
+  el.style.height = "auto";
+  el.style.height = el.scrollHeight + "px";
+}
+
+function addItem() {
+  const items = document.getElementById("items");
+  const div = document.createElement("div");
+  div.className = "item";
+  div.innerHTML = `
+    <div class="item-row">
+      <div class="desc">
+        <textarea rows="1" oninput="autoGrow(this)"></textarea>
+      </div>
+      <div class="qty">
+        <input type="number" class="q">
+      </div>
+      <div class="price">
+        <input type="number" class="p">
+      </div>
+    </div>
+  `;
+  items.appendChild(div);
+}
+
+document.addEventListener("input", () => {
+  let total = 0;
+  document.querySelectorAll(".item").forEach(item => {
+    total += (item.querySelector(".q")?.value || 0) *
+             (item.querySelector(".p")?.value || 0);
+  });
+  document.getElementById("total").innerText = total.toFixed(2);
+});
+
+async function savePDF() {
+  const name = prompt("File name");
+  if (!name) return;
+
+  const canvas = await html2canvas(invoice, { scale: 2 });
+  const img = canvas.toDataURL("image/png");
+
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF("p","mm","a4");
+
+  const w = 210;
+  const h = canvas.height * w / canvas.width;
+
+  pdf.addImage(img, "PNG", 0, 0, w, h);
+  pdf.save(name + ".pdf");
+}
+</script>
+
+</body>
+</html>
